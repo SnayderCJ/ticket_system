@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+    <section class="hero">
+        <div class="hero-content">
+            <div>
+                <h1>Sistema de Gestión de Tickets</h1>
+                <p>Organiza y gestiona tus tickets de soporte de manera eficiente.</p>
+                <a class="btn btn-primary btn-lg" href="{% url 'anadir_ticket' %}" role="button">Crear Ticket</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="about-us">
+        <h2>Sobre Nosotros</h2>
+        <p>Somos un equipo dedicado a brindar soluciones rápidas y efectivas a tus problemas técnicos. Nuestro sistema de tickets te permite comunicarte con nosotros de forma clara y organizada, y hacer seguimiento del progreso de tus solicitudes.</p>
+    </section>
+
+    <section class="features">
+        <h2>Características Principales</h2>
+        <ul>
+            <li>Creación de tickets con diferentes prioridades.</li>
+            <li>Asignación de tickets a usuarios específicos.</li>
+            <li>Seguimiento del estado de los tickets.</li>
+            <li>Historial de interacciones y actualizaciones.</li>
+        </ul>
+    </section>
+</div>
+{% endblock content %}

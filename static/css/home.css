@@ -1,0 +1,126 @@
+/* Estilos generales para home.html */
+.container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+/* Sección Hero */
+.hero {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+    padding: 2rem;
+    border-radius: 10px;
+    /* Bordes redondeados */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    /* Sombra sutil */
+}
+
+.hero-content {
+    flex: 1;
+    margin-right: 2rem;
+}
+
+.hero-content h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.hero-content p {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+}
+
+.hero-image {
+    flex: 1;
+    text-align: center;
+}
+
+.hero-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+/* Sección Productos Destacados */
+.featured-products h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.product-card {
+    background-color: var(--primary-color);
+    border-radius: 10px;
+    padding: 1rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.product-card img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 1rem;
+    border-radius: 10px;
+}
+
+.product-card h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+
+.product-card p {
+    margin-bottom: 1rem;
+}
+
+/* Sección Sobre Nosotros */
+.about-us {
+    text-align: center;
+    padding: 2rem;
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-top: 2rem;
+}
+
+.about-us h2 {
+    margin-bottom: 1rem;
+}
+
+.about-us p {
+    line-height: 1.8;
+    margin-bottom: 1rem;
+}
+
+/* Sección de bienvenida */
+.welcome {
+    text-align: center;
+    padding: 3rem;
+}
+
+.welcome h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.welcome p {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    margin-bottom: 2rem;
+}
+
+.button-group {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}

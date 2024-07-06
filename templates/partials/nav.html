@@ -1,0 +1,36 @@
+{% load static %}
+
+<nav class="nav">
+    <ul>
+        <li>
+            <a href="{% url 'home' %}">
+                <i class="fas fa-home"></i> Inicio
+            </a>
+        </li>
+        <li>
+            <a href="{% url 'index' %}">
+                <i class="fas fa-list"></i> Lista de Tickets
+            </a>
+        </li>
+        <li>
+            <a href="{% url 'anadir_ticket' %}">
+                <i class="fas fa-plus"></i> Añadir Ticket
+            </a>
+        </li>
+        <li>
+            <a href="{% url 'tickets_en_espera' %}">
+                <i class="fas fa-clock"></i> Tickets en Espera
+            </a>
+        </li>
+        <li>
+            <a href="{% url 'tickets_atendidos' %}">
+                <i class="fas fa-check"></i> Tickets Atendidos
+            </a>
+        </li>
+        <li>
+            <a href="{% url 'agregar_cliente' %}">
+                <i class="fas fa-user-plus"></i> Agregar Cliente
+            </a>
+        </li>
+    </ul>
+</nav>

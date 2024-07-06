@@ -29,7 +29,7 @@ La interfaz de usuario está diseñada con un estilo minimalista y una paleta de
 
 1. *Clonar el repositorio:*
    ```bash
-   git https://github.com/SnayderCJ/ticket_system.git 
+   git clone https://github.com/SnayderCJ/ticket_system.git 
    cd ticket_system
    ```
     

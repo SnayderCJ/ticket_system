@@ -34,7 +34,7 @@ La interfaz de usuario está diseñada con un estilo minimalista y una paleta de
    ```
     
 
-3. *Crear (o activar) un entorno virtual::*
+3. *Crear (o activar) un entorno virtual::*   
     ```bash
     py -m venv venv  
     venv\Scripts\activate 

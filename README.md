@@ -36,7 +36,7 @@ La interfaz de usuario está diseñada con un estilo minimalista y una paleta de
 
 3. *Crear (o activar) un entorno virtual::*
     ```bash
-    python -m venv venv  
+    py -m venv venv  
     venv\Scripts\activate 
     ```
 
@@ -53,12 +53,12 @@ La interfaz de usuario está diseñada con un estilo minimalista y una paleta de
 
 6. *Crear un superusuario:*
     ```bash
-    python manage.py createsuperuser
+    py manage.py createsuperuser
     ```
 
 7. *Ejecutar el servidor de desarrollo:*
     ```bash
-    python manage.py runserver
+    py manage.py runserver
     ```
 
 8. *Acceder a la aplicación en tu navegador:*

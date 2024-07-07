@@ -25,7 +25,7 @@ La interfaz de usuario está diseñada con un estilo minimalista y una paleta de
     * *HTML, CSS, JavaScript:* Lenguajes esenciales para crear la interfaz de usuario.
     * *Font Awesome:* Biblioteca de iconos para añadir elementos visuales atractivos.  
 
-## ⚙️ Cómo Ejecutar la Aplicación
+## ⚙️ Cómo Ejecutar la Aplicación  
 
 1. *Clonar el repositorio:*
    ```bash

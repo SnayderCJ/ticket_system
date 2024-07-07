@@ -71,4 +71,4 @@ La interfaz de usuario está diseñada con un estilo minimalista y una paleta de
     *   Accede al panel de administración: [http://127.0.0.1:8000/admin/](http://127.0.0.1:8000/admin/) (utiliza las credenciales del superusuario). que creaste en el paso 5.
     
 
-## Explora y disfruta de Sistema de Gestión de Tickets!** 🎉  
+## Explora y disfruta de *Sistema de Gestión de Tickets!* 🎉  

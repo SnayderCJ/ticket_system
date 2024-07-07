@@ -28,12 +28,10 @@ def anadir_ticket(request):
         form = TicketForm(request.POST)
         if form.is_valid():
             ticket = form.save(commit=False)
-            ticket.usuario_asignado = (
-                request.user
-            )  # Asigna el usuario actual si está autenticado
+            ticket.usuario_asignado = request.user
             ticket.save()
             messages.success(request, "Ticket añadido con éxito.")
-            return redirect("index")
+            return redirect("tickets:index")
     else:
         form = TicketForm()
     return render(request, "pages/anadirTickets.html", {"form": form})
@@ -59,17 +57,17 @@ def atender_ticket(request, ticket_id):
         if form.is_valid():
             form.save()
             messages.success(request, "Ticket atendido y cerrado con éxito.")
-            return redirect("index")
+            return redirect("tickets:index")
     else:
         form = TicketUpdateForm(instance=ticket)
-    return render(
-        request, "pages/atenderTicket.html", {"ticket": ticket, "form": form}
-    )
+    return render(request, "pages/atenderTicket.html", {"ticket": ticket, "form": form})
 
 
 # -------------------------
 # Vistas para gestión de clientes
 # -------------------------
+
+
 def agregar_cliente(request):
     """Muestra un formulario para agregar un nuevo cliente y lo guarda si es válido."""
     if request.method == "POST":
@@ -77,7 +75,7 @@ def agregar_cliente(request):
         if form.is_valid():
             form.save()
             messages.success(request, "Cliente añadido con éxito.")
-            return redirect("agregar_cliente")
+            return redirect("agregarCliente")
     else:
         form = ClienteForm()
     return render(request, "pages/agregarCliente.html", {"form": form})
@@ -87,13 +85,13 @@ def ver_cliente(request, cliente_id):
     """Muestra los detalles de un cliente y sus tickets asociados."""
     cliente = get_object_or_404(Cliente, id=cliente_id)
     tickets = cliente.tickets.all()
-    return render(
-        request, "pages/ver_cliente.html", {"cliente": cliente, "tickets": tickets}
-    )
+    return render(request, "pages/verCliente.html", {"cliente": cliente, "tickets": tickets})
+
 
 # -------------------------
 # Vistas para guardar/cargar y ordenar tickets
 # -------------------------
+
 
 def guardar_cola(request):
     """Guarda la cola de tickets abiertos en un archivo JSON."""
@@ -138,10 +136,8 @@ def cargar_cola(request):
 def ordenar_tickets(request):
     """Ordena los tickets en espera por prioridad (usando quicksort)."""
     tickets = Ticket.objects.filter(estado="Abierto").order_by("fecha_creacion")
-    tickets_ordenados = quicksort(
-        tickets, lambda ticket: ticket.prioridad
-    )  # Ordenar por prioridad (puedes cambiar el criterio)
-    return render(request, "tickets_en_espera.html", {"tickets": tickets_ordenados})
+    tickets_ordenados = quicksort(tickets, lambda ticket: ticket.prioridad)
+    return render(request, "pages/clienteEnEspera.html", {"tickets": tickets_ordenados})
 
 
 def buscar_ticket(request):
@@ -152,15 +148,16 @@ def buscar_ticket(request):
             resultados = busqueda_lineal(Ticket.objects.all(), query)
             return render(
                 request,
-                "resultados_busqueda.html",
+                "pages/resultados_busqueda.html",
                 {"resultados": resultados, "query": query},
             )
-    return render(request, "buscar_ticket.html")
+    return render(request, "pages/buscar_ticket.html")
 
 
 # -------------------------
 # Funciones auxiliares (quicksort y busqueda_lineal)
 # -------------------------
+
 
 def quicksort(arr, key=lambda x: x):
     """Implementación del algoritmo quicksort."""

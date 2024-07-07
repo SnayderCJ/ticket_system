@@ -2,11 +2,44 @@
 {% load static %}
 
 {% block content %}
+<div class="container mx-auto max-w-md p-4">
+  <div class="bg-gray-800 rounded-lg shadow-md p-6">
+    <h1 class="text-2xl font-bold text-white mb-4">Añadir Ticket</h1>
+
+    {% if messages %}
+    <ul class="messages">
+      {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %}
     
-    <h1> Añadir Tikets: </h1>
+    <form method="POST" action="">
+      {% csrf_token %}
+      
+      {% for field in form %}
+        <div class="mb-4">
+          <label for="{{ field.id_for_label }}" class="block text-white text-sm font-bold mb-2">{{ field.label_tag }}</label>
+          {{ field }}
+          {% if field.errors %}
+            <p class="text-red-500 text-xs italic mt-1">
+              {% for error in field.errors %}
+                {{ error }}
+              {% endfor %}
+            </p>
+          {% endif %}
+        </div>
+      {% endfor %}
 
-    {% comment %} <a href="{% url "agregarTickets" %}"><button> Agregar </button></a> {% endcomment %}
-
-
-
-{% endblock %}
+      <div class="flex items-center justify-between">
+        <button type="submit" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+          Añadir Ticket
+        </button>
+        <a href="{% url 'index' %}" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+          Cancelar
+        </a>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock content %}

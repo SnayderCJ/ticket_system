@@ -36,19 +36,19 @@ def anadir_ticket(request):
             return redirect("index")
     else:
         form = TicketForm()
-    return render(request, "pages/anadir_ticket.html", {"form": form})
+    return render(request, "pages/anadirTickets.html", {"form": form})
 
 
 def tickets_en_espera(request):
     """Muestra la lista de tickets en espera (estado 'Abierto'), ordenados por fecha de creación."""
     tickets = Ticket.objects.filter(estado="Abierto").order_by("fecha_creacion")
-    return render(request, "pages/tickets_en_espera.html", {"tickets": tickets})
+    return render(request, "pages/clienteEnEspera.html", {"tickets": tickets})
 
 
 def tickets_atendidos(request):
     """Muestra la lista de tickets atendidos (estados diferentes a 'Abierto'), ordenados por fecha de creación descendente."""
     tickets = Ticket.objects.exclude(estado="Abierto").order_by("-fecha_creacion")
-    return render(request, "pages/tickets_atendidos.html", {"tickets": tickets})
+    return render(request, "pages/clienteAtendidos.html", {"tickets": tickets})
 
 
 def atender_ticket(request, ticket_id):
@@ -63,7 +63,7 @@ def atender_ticket(request, ticket_id):
     else:
         form = TicketUpdateForm(instance=ticket)
     return render(
-        request, "pages/atender_ticket.html", {"ticket": ticket, "form": form}
+        request, "pages/atenderTicket.html", {"ticket": ticket, "form": form}
     )
 
 
@@ -80,7 +80,7 @@ def agregar_cliente(request):
             return redirect("agregar_cliente")
     else:
         form = ClienteForm()
-    return render(request, "pages/agregar_cliente.html", {"form": form})
+    return render(request, "pages/agregarCliente.html", {"form": form})
 
 
 def ver_cliente(request, cliente_id):

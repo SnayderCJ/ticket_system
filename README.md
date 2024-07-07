@@ -1,6 +1,6 @@
 # 🎁 Sistemas de Gestión de Tickets 🎉
 
-✨ *Descripción*
+✨ *Descripción*  
 
 ¡Bienvenido al proyecto *Sistemas de Gestión de Tickets*! 🛒
 

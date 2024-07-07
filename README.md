@@ -23,7 +23,7 @@ La interfaz de usuario está diseñada con un estilo minimalista y una paleta de
     * *sqlite3:* Base de datos  eficiente para almacenar los datos.
 * *Frontend:*
     * *HTML, CSS, JavaScript:* Lenguajes esenciales para crear la interfaz de usuario.
-    * *Font Awesome:* Biblioteca de iconos para añadir elementos visuales atractivos.
+    * *Font Awesome:* Biblioteca de iconos para añadir elementos visuales atractivos.  
 
 ## ⚙️ Cómo Ejecutar la Aplicación
 

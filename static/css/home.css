@@ -1,3 +1,10 @@
+body {
+    background-color: #202020;
+    color: white;
+    position: relative;
+    overflow: hidden;
+}
+
 /* Estilos generales para home.html */
 .container {
     max-width: 960px;

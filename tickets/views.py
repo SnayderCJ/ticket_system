@@ -31,7 +31,7 @@ def anadir_ticket(request):
             ticket.usuario_asignado = request.user
             ticket.save()
             messages.success(request, "Ticket añadido con éxito.")
-            return redirect("tickets:index")
+            return redirect("index")
     else:
         form = TicketForm()
     return render(request, "pages/anadirTickets.html", {"form": form})
@@ -57,7 +57,7 @@ def atender_ticket(request, ticket_id):
         if form.is_valid():
             form.save()
             messages.success(request, "Ticket atendido y cerrado con éxito.")
-            return redirect("tickets:index")
+            return redirect("index")
     else:
         form = TicketUpdateForm(instance=ticket)
     return render(request, "pages/atenderTicket.html", {"ticket": ticket, "form": form})
@@ -75,7 +75,7 @@ def agregar_cliente(request):
         if form.is_valid():
             form.save()
             messages.success(request, "Cliente añadido con éxito.")
-            return redirect("agregarCliente")
+            return redirect("agregar_cliente")
     else:
         form = ClienteForm()
     return render(request, "pages/agregarCliente.html", {"form": form})

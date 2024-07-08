@@ -1,13 +1,3 @@
-body {
-    background-color: #202020;
-    color: white;
-    position: relative;
-    overflow: hidden;
-}
-
-/* Estilos generales para la navegación */
-
-
 .nav {
     background-color: #333;
     /* Color de fondo de la barra de navegación */
@@ -44,6 +34,4 @@ body {
 .nav a:hover {
     background-color: #8800ff;
     color: #fff;
-
 }
-

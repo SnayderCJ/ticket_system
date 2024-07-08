@@ -25,9 +25,7 @@ class Ticket(models.Model):
     PRIORIDAD_URGENTE = 'Urgente'
 
     ESTADO_ABIERTO = 'Abierto'
-    ESTADO_EN_PROCESO = 'En Proceso'
-    ESTADO_RESUELTO = 'Resuelto'
-    ESTADO_CERRADO = 'Cerrado'
+    ESTADO_CERRADO = 'Cerrado'  # Eliminamos las opciones "En Proceso" y "Resuelto"
 
     PRIORIDAD_CHOICES = [
         (PRIORIDAD_BAJA, 'Baja'),
@@ -38,9 +36,7 @@ class Ticket(models.Model):
 
     ESTADO_CHOICES = [
         (ESTADO_ABIERTO, 'Abierto'),
-        (ESTADO_EN_PROCESO, 'En Proceso'),
-        (ESTADO_RESUELTO, 'Resuelto'),
-        (ESTADO_CERRADO, 'Cerrado'),
+        (ESTADO_CERRADO, 'Cerrado'),  # Solo dejamos "Abierto" y "Cerrado"
     ]
 
     id_ticket = models.AutoField(primary_key=True)

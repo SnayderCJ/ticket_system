@@ -52,19 +52,9 @@ def anadir_ticket(request):
 
 
 def tickets_en_espera(request):
-    queryset = Ticket.objects.filter(estado="Abierto").order_by("-prioridad")
-    filter_form = TicketFilter(request.GET, queryset=queryset)
-
-    if filter_form.is_valid():
-        tickets = filter_form.qs
-    else:
-        tickets = queryset
-
-    search_query = request.GET.get('q')
-    if search_query:
-        tickets = tickets.filter(titulo__icontains=search_query)
-
-    return render(request, 'pages/clienteEnEspera.html', {'tickets': tickets, 'filter_form': filter_form})
+    """Muestra la lista de tickets en espera (estado 'Abierto'), ordenados por fecha de creación."""
+    tickets = Ticket.objects.filter(estado="Abierto").order_by("fecha_creacion")
+    return render(request, "pages/clienteEnEspera.html", {"tickets": tickets})
 
 
 def tickets_atendidos(request):

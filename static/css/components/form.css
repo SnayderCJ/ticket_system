@@ -1,0 +1,158 @@
+/* Estilos generales para el formulario */
+.form-container {
+    background-color: var(--secondary-color);
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    background: #333;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+/* Estilos para las etiquetas (modificado) */
+label {
+    display: flex; /* Usamos flexbox para alinear el ícono y el texto */
+    align-items: center; /* Alineamos verticalmente al centro */
+    margin-bottom: 0.5rem;
+    color: var(--text-color);
+}
+
+label i {
+    margin-right: 0.5rem; 
+}
+
+input[type="number"] {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid var(--text-secondary-color);
+    border-radius: 5px;
+    background-color: var(--primary-color);
+    color: var(--text-color);
+    box-sizing: border-box;
+}
+
+input[type="number"]:focus {
+    outline: none;
+    border-color: var(--accent-color);
+}
+
+
+input[type="file"] {
+    display: block;
+    margin-top: 0.5rem;
+}
+
+/* Estilos para los campos de entrada */
+input[type="text"],
+input[type="password"],
+input[type="email"],
+textarea,
+select {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid var(--text-secondary-color);
+    /* Borde gris claro */
+    border-radius: 5px;
+    background-color: var(--primary-color);
+    /* Fondo gris oscuro */
+    color: var(--text-color);
+    /* Color de texto blanco */
+    box-sizing: border-box;
+    /* Incluye el borde y el padding en el ancho total */
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="email"]:focus,
+textarea:focus,
+select:focus {
+    outline: none;
+    border-color: var(--accent-color);
+    /* Borde verde al enfocar */
+}
+
+/* Estilos para el campo de entrada de fecha y hora (datetime-local) */
+.form-container input[type="datetime-local"] { /* Selector más específico */
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid var(--text-secondary-color); 
+    border-radius: 5px;
+    background-color: #fff; /* Fondo blanco */
+    color: #333; /* Color de texto negro */
+    box-sizing: border-box;
+}
+
+.form-container input[type="datetime-local"]:focus {
+    outline: none;
+    border-color: var(--accent-color);
+}
+
+/* Estilos para el campo de entrada de archivo (file) */
+input[type="file"] {
+    display: block;
+    width: 100%; 
+    padding: 0.5rem;
+    border: 1px solid var(--text-secondary-color);
+    border-radius: 5px;
+    background-color: var(--primary-color);
+    color: var(--text-color);
+}
+
+input[type="file"]::file-selector-button {
+    background-color: var(--accent-color);
+    color: var(--primary-color);
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+input[type="file"]::file-selector-button:hover {
+    background-color: lighten(var(--accent-color), 10%);
+}
+
+/* Estilos para los botones */
+button[type="submit"] {
+    background-color: var(--accent-color);
+    /* Fondo verde */
+    color: var(--primary-color);
+    /* Texto gris oscuro */
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    /* Transición suave para el color de fondo */
+}
+
+button[type="submit"]:hover {
+    background-color: lighten(var(--accent-color), 10%);
+    /* Verde más claro al pasar el mouse */
+}
+
+/* Estilos para errores de validación */
+.errorlist {
+    color: var(--error-color);
+    /* Color de error (rojo o similar) */
+    font-size: 0.9rem;
+    list-style: none;
+    /* Elimina los puntos de la lista */
+    margin: 0.5rem 0;
+    padding: 0;
+}
+
+/* Estilos para cada mensaje de error */
+.errorlist li {
+    margin-bottom: 0.3rem;
+}
+
+/* Estilos para el campo con error */
+.form-group.has-error input,
+.form-group.has-error select,
+.form-group.has-error textarea {
+    border-color: var(--error-color);
+    /* Resalta el borde del campo en rojo */
+}

@@ -1,0 +1,62 @@
+/* Contenedor de la tabla */
+.table-container {
+    overflow-x: auto;
+    margin-top: 2rem;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Estilos de la tabla */
+.styled-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 2rem;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    table-layout: fixed;
+}
+
+/* Encabezados */
+.styled-table th {
+    color: white; 
+    padding: 1rem;
+    text-align: left;
+    font-weight: bold;
+    border-bottom: 2px solid #ddd;
+}
+
+/* Celdas de datos */
+.styled-table td {
+    padding: 1rem;
+    border-bottom: 1px solid var(--text-secondary-color);
+    vertical-align: middle;
+}
+
+/* Filas pares */
+.styled-table tbody tr:nth-child(even) {
+    background-color: var(--primary-color);
+    /* Fondo gris más oscuro para las filas pares */
+}
+
+/* Enlaces en las celdas */
+.styled-table a {
+    color: var(--accent-color);
+    /* Enlaces en verde */
+    margin: 0 0.5rem;
+    /* Espacio entre los enlaces */
+}
+
+/* Imagen del producto */
+.styled-table img {
+    max-width: 50px;
+    /* Ancho máximo de la imagen */
+    height: auto;
+    /* Ajusta la altura automáticamente */
+    border-radius: 5px;
+    /* Bordes redondeados para la imagen */
+}
+
+/* Estilos para las celdas de acciones */
+.styled-table td:last-child {
+    text-align: center;
+}

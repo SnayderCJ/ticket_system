@@ -2,25 +2,25 @@
 {% load static %}
 
 {% block content %}
-    
-    <h1> Agregar: </h1>
 
+<div class="container">
+    <h1>Agregar:</h1>
 
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">Añadir</button>
+        <button type="submit" class="btn btn-primary">Añadir</button> <div class="form-group">
+            <a class="btn btn-secondary" href="{% url 'index' %}">Cancelar</a>
+        </div>
     </form>
+</div>
 
-
-    {% if messages %}
-        <ul>
-            {% for message in messages %}
-                <li>{{ message }}</li>
-            {% endfor %}
-        </ul>
-    {% endif %}
-
-
+{% if messages %}
+    <ul>
+        {% for message in messages %}
+            <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
 
 {% endblock %}

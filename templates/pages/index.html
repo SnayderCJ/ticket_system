@@ -1,11 +1,23 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
-<div class="container mt-5">
+<div class="container">
     <h1>Lista de Tickets</h1>
 
-    <a href="{% url 'anadir_ticket' %}" class="btn btn-primary">Crear Nuevo Ticket</a>
+    <a href="{% url 'anadir_ticket' %}" class="btn btn-primary">
+        Crear Nuevo Ticket
+    </a>
 
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    {% if tickets %}
     <table class="styled-table">
         <thead>
             <tr>
@@ -19,7 +31,7 @@
             </tr>
         </thead>
         <tbody>
-            {% for ticket in tickets %}  
+            {% for ticket in tickets %}
                 <tr>
                     <td>{{ ticket.id_ticket }}</td>
                     <td><a href="{% url 'atender_ticket' ticket.id_ticket %}">{{ ticket.titulo }}</a></td>
@@ -38,5 +50,8 @@
             {% endfor %}
         </tbody>
     </table>
+    {% else %}
+        <h2 class="no-tickets-message">No hay tickets disponibles.</h2>
+    {% endif %}
 </div>
 {% endblock content %}

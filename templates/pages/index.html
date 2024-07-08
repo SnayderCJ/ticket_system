@@ -3,11 +3,16 @@
 
 {% block content %}
 <div class="container">
-    <h1>Lista de Tickets</h1>
 
-    <a href="{% url 'anadir_ticket' %}" class="btn btn-primary">
-        Crear Nuevo Ticket
-    </a>
+    <div class='hero'>
+        <h1 class='hero-content'>Lista de Tickets</h1>
+    </div>
+
+    <button type="button" class="btn">
+        <a href="{% url 'anadir_ticket' %}">
+            Crear Nuevo Ticket
+        </a>
+    </button>
 
     {% if messages %}
         <ul class="messages">
@@ -18,38 +23,40 @@
     {% endif %}
 
     {% if tickets %}
-    <table class="styled-table">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Título</th>
-                <th>Cliente</th>
-                <th>Prioridad</th>
-                <th>Estado</th>
-                <th>Fecha de Creación</th>
-                <th>Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for ticket in tickets %}
+        <table class="styled-table">
+            <thead>
                 <tr>
-                    <td>{{ ticket.id_ticket }}</td>
-                    <td><a href="{% url 'atender_ticket' ticket.id_ticket %}">{{ ticket.titulo }}</a></td>
-                    <td>{{ ticket.cliente }}</td>
-                    <td>{{ ticket.prioridad }}</td>
-                    <td>{{ ticket.estado }}</td>
-                    <td>{{ ticket.fecha_creacion }}</td>
-                    <td>
-                        <a href="{% url 'atender_ticket' ticket.id_ticket %}" class="btn btn-sm btn-info">Ver Detalles</a>
-                    </td>
+                    <th>ID</th>
+                    <th>Título</th>
+                    <th>Cliente</th>
+                    <th>Prioridad</th>
+                    <th>Estado</th>
+                    <th>Fecha de Creación</th>
+                    <th>Acciones</th>
                 </tr>
-            {% empty %}
-                <tr>
-                    <td colspan="7">No hay tickets disponibles.</td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                {% for ticket in tickets %}
+                    <tr>
+                        <td>{{ ticket.id_ticket }}</td>
+                        <td>{{ ticket.titulo }} </td>
+                        <td>{{ ticket.cliente }}</td>
+                        <td>{{ ticket.prioridad }}</td>
+                        <td>{{ ticket.estado }}</td>
+                        <td>{{ ticket.fecha_creacion }}</td>
+                        <td>
+                            <button class="btn">
+                                <a href="{% url 'atender_ticket' ticket.id_ticket %}" > Ver Detalles</a>
+                            </button>
+                        </td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="7">No hay tickets disponibles.</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     {% else %}
         <h2 class="no-tickets-message">No hay tickets disponibles.</h2>
     {% endif %}

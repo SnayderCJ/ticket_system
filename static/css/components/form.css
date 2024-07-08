@@ -118,3 +118,19 @@ label {
     color: white;
     box-shadow: #8800ff 1px 2px 1px 1px;
 }
+
+/* Estilos para el menú desplegable de prioridad */
+select.form-control {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-right: 10px;
+}
+
+/* Estilos para el campo de búsqueda */
+input[type="text"] {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-right: 10px;
+}

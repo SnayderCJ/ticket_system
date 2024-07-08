@@ -1,3 +1,4 @@
+import django_filters
 from django import forms
 from .models import Cliente, Ticket
 
@@ -43,3 +44,14 @@ class TicketUpdateForm(forms.ModelForm):
         widgets = {
             'estado': forms.Select(attrs={'class': 'form-control'}),
         }
+
+
+class TicketFilter(django_filters.FilterSet):
+    prioridad = django_filters.MultipleChoiceFilter(
+        choices=Ticket.PRIORIDAD_CHOICES,
+        widget=forms.CheckboxSelectMultiple
+    )
+
+    class Meta:
+        model = Ticket
+        fields = ['prioridad']

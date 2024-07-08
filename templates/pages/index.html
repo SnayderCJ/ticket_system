@@ -22,6 +22,22 @@
         </ul>
     {% endif %}
 
+    <form method="get">
+        <label for="prioridad">Prioridad:</label>
+        <select name="prioridad" id="prioridad" class="form-control">
+            <option value="">Todas las prioridades</option>
+            {% for value, label in prioridades %}
+                <option value="{{ value }}" {% if value == prioridad %}selected{% endif %}>{{ label }}</option>
+            {% endfor %}
+        </select>
+        <button type="submit" class="btn-form">Filtrar</button>
+    </form>
+    
+    <form method="get">
+        <input type="text" name="q" placeholder="Buscar por título...">
+        <button type="submit" class="btn-form">Buscar</button>
+    </form>
+
     {% if tickets %}
         <table class="styled-table">
             <thead>
@@ -39,14 +55,14 @@
                 {% for ticket in tickets %}
                     <tr>
                         <td>{{ ticket.id_ticket }}</td>
-                        <td>{{ ticket.titulo }} </td>
+                        <td>{{ ticket.titulo }}</td>
                         <td>{{ ticket.cliente }}</td>
-                        <td>{{ ticket.prioridad }}</td>
-                        <td>{{ ticket.estado }}</td>
+                        <td>{{ ticket.get_prioridad_display }}</td>  {# Mostrar el valor legible #}
+                        <td>{{ ticket.get_estado_display }}</td>    {# Mostrar el valor legible #}
                         <td>{{ ticket.fecha_creacion }}</td>
                         <td>
                             <button class="btn">
-                                <a href="{% url 'atender_ticket' ticket.id_ticket %}" > Ver Detalles </a>
+                                <a href="{% url 'atender_ticket' ticket.id_ticket %}">Ver Detalles</a>
                             </button>
                         </td>
                     </tr>
@@ -62,3 +78,4 @@
     {% endif %}
 </div>
 {% endblock content %}
+    

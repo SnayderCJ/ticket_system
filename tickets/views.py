@@ -1,8 +1,9 @@
 import json
+from django.db.models import Q
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from .models import Ticket, Cliente
-from .forms import TicketForm, ClienteForm, TicketUpdateForm
+from .forms import TicketForm, ClienteForm, TicketUpdateForm, TicketFilter
 
 
 # -------------------------
@@ -17,10 +18,23 @@ def home(request):
 # Vistas para gestión de tickets
 # -------------------------
 def index(request):
-    """Muestra la lista de todos los tickets, ordenados por fecha de creación descendente."""
-    tickets = Ticket.objects.all().order_by("-fecha_creacion")
-    return render(request, "pages/index.html", {"tickets": tickets})
+    queryset = Ticket.objects.all().order_by("-prioridad")
+    prioridad = request.GET.get('prioridad')
 
+    if prioridad:
+        queryset = queryset.filter(prioridad=prioridad)
+
+    filter_form = TicketFilter(request.GET)  # Pasa request.GET al formulario
+
+    search_query = request.GET.get('q')
+    if search_query:
+        queryset = queryset.filter(titulo__icontains=search_query)
+
+    return render(request, 'pages/index.html', {
+        'tickets': queryset,
+        'filter_form': filter_form,
+        'prioridades': Ticket.PRIORIDAD_CHOICES  # Pasa las opciones de prioridad
+    })
 
 def anadir_ticket(request):
     """Muestra un formulario para crear un nuevo ticket y lo guarda si es válido."""
@@ -38,15 +52,39 @@ def anadir_ticket(request):
 
 
 def tickets_en_espera(request):
-    """Muestra la lista de tickets en espera (estado 'Abierto'), ordenados por fecha de creación."""
-    tickets = Ticket.objects.filter(estado="Abierto").order_by("fecha_creacion")
-    return render(request, "pages/clienteEnEspera.html", {"tickets": tickets})
+    queryset = Ticket.objects.filter(estado="Abierto").order_by("-prioridad")
+    filter_form = TicketFilter(request.GET, queryset=queryset)
+
+    if filter_form.is_valid():
+        tickets = filter_form.qs
+    else:
+        tickets = queryset
+
+    search_query = request.GET.get('q')
+    if search_query:
+        tickets = tickets.filter(titulo__icontains=search_query)
+
+    return render(request, 'pages/clienteEnEspera.html', {'tickets': tickets, 'filter_form': filter_form})
 
 
 def tickets_atendidos(request):
-    """Muestra la lista de tickets atendidos (estados diferentes a 'Abierto'), ordenados por fecha de creación descendente."""
-    tickets = Ticket.objects.exclude(estado="Abierto").order_by("-fecha_creacion")
-    return render(request, "pages/clienteAtendidos.html", {"tickets": tickets})
+    queryset = Ticket.objects.all().order_by("-prioridad")
+    prioridad = request.GET.get('prioridad')
+
+    if prioridad:
+        queryset = queryset.filter(prioridad=prioridad)
+
+    filter_form = TicketFilter(request.GET)  # Pasa request.GET al formulario
+
+    search_query = request.GET.get('q')
+    if search_query:
+        queryset = queryset.filter(titulo__icontains=search_query)
+
+    return render(request, 'pages/clienteAtendidos.html', {
+        'tickets': queryset,
+        'filter_form': filter_form,
+        'prioridades': Ticket.PRIORIDAD_CHOICES  # Pasa las opciones de prioridad
+    })
 
 
 def atender_ticket(request, ticket_id):

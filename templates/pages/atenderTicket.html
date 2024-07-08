@@ -1,12 +1,18 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h2>Atender Ticket #{{ ticket.id_ticket }}</h2>
+
+<div class='container'>
+    <div class='hero'>
+        <h1 class='hero-content'>Atender Ticket #{{ ticket.id_ticket }}</h1>
+    </div>
 
 <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+
+    <button type="submit" class="btn-form-1"> Guardar Cambios </button>
 </form>
+</div>
 
 {% endblock content %}

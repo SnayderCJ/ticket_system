@@ -2,9 +2,12 @@
 {% load static %}
 
 {% block content %}
-<div>
-  <div>
-    <h1>Añadir Ticket</h1>
+<div class='container'>
+  <div class='form-container'>
+
+    <div class='hero'>
+      <h1 class='hero-content'> Añadir Ticket </h1>
+    </div>
 
     {% if messages %}
     <ul>
@@ -18,8 +21,8 @@
       {% csrf_token %}
       
       {% for field in form %}
-        <div class="mb-4">
-          <label for="{{ field.id_for_label }}" class="block text-white text-sm font-bold mb-2">{{ field.label_tag }}</label>
+        <div>
+          <label for="{{ field.id_for_label }}">{{ field.label_tag }}</label>
           {{ field }}
           {% if field.errors %}
             <p>
@@ -31,13 +34,16 @@
         </div>
       {% endfor %}
 
-      <div>
-        <button type="submit" >
+      <div class='btn-form-buttons'>
+        <button type="submit" class='btn-form'>
           Añadir Ticket
         </button>
-        <a href="{% url 'index' %}">
-          Cancelar
-        </a>
+
+        <button type='button' class='btn-form'>
+          <a href="{% url 'index' %}">
+            Cancelar
+          </a>
+        </button>
       </div>
     </form>
   </div>

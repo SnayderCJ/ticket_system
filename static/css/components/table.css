@@ -1,55 +1,59 @@
-/* Estilos generales para la tabla */
+/* Contenedor de la tabla (opcional) */
 .table-container {
     overflow-x: auto;
+    margin: 1rem 0;  /* Espacio alrededor de la tabla */
   }
   
+  /* Tabla */
   .styled-table {
     width: 100%;
     border-collapse: collapse;
-    margin-bottom: 20px;
+    background-color: var(--secondary-color); /* Fondo gris oscuro */
+    border-radius: 8px; /* Bordes redondeados */
+    overflow: hidden; /* Para que los bordes redondeados se apliquen correctamente */
   }
   
-  .styled-table th,
-  .styled-table td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: center;
-  }
-  
+  /* Encabezados */
   .styled-table th {
-    background-color: #000000;
+    
+    color: var(--text-color); /* Texto blanco */
+    padding: 1rem; 
+    text-align: left;
+    font-weight: bold;
+    border-bottom: 2px solid var(--accent-color); /* Línea divisoria verde */
+  }
+  
+  /* Celdas de datos */
+  .styled-table td {
     text-align: center;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Línea divisoria sutil */
+    color: var(--text-color);
   }
   
-  .styled-table tr:nth-child(even) {
-    background-color: #202020;
+  /* Filas pares e impares */
+  .styled-table tbody tr:nth-child(even) {
+    background-color: var(--primary-color); /* Fondo gris más oscuro para filas pares */
   }
   
-  /* Estilos para los mensajes */
-  .messages {
-    list-style: none;
-    margin: 0;
-    padding: 0;
+  .styled-table tbody tr:nth-child(odd) {
+    background-color: var(--secondary-color); /* Fondo gris medio para filas impares */
   }
   
-  .messages li {
-    margin-bottom: 10px;
-    padding: 10px;
-    border-radius: 5px;
-  }
-  
-  .messages li.success {
-    background-color: #4CAF50; /* Verde */
+  /* Enlaces en la tabla */
+  .styled-table a {
     color: white;
+    text-decoration: none;
   }
   
-  .messages li.error {
-    background-color: #f44336; /* Rojo */
-    color: white;
+  .styled-table a:hover {
+    text-decoration: underline;
   }
   
-  .messages li.warning {
-    background-color: #ff9800; /* Amarillo */
-    color: white;
+  /* Iconos en la tabla (si los usas) */
+  .styled-table i {
+    margin-right: 0.5rem;
   }
   

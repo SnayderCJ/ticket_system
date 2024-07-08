@@ -19,12 +19,31 @@
     color: white;
 }
 
+.btn-i a{
+    color: white;
+    text-decoration: none;
+}
+
+
+/* Estilos para botones con iconos */
+.btn-i {
+    margin-right: 0.5rem; 
+}
+
 .btn a{
+    color: white;
+    text-decoration: none;
+}
+
+
+.btn i{
+    margin-right: 0.5rem;
     color: white;
 }
 
-/* Estilos para botones con iconos */
-.btn i {
-    margin-right: 0.5rem;
-    /* Espacio entre el icono y el texto */
+.btn i:hover{
+    background: #8800ff ;
+    color: #8800ff;
+    text-decoration: none;
 }
+

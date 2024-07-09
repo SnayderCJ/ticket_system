@@ -1,5 +1,6 @@
 import json
 from django.db.models import Q
+from django.apps import AppConfig
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from .models import Ticket, Cliente
@@ -207,3 +208,29 @@ def busqueda_lineal(arr, query):
         ):  # Búsqueda insensible a mayúsculas/minúsculas
             resultados.append(elemento)
     return resultados
+
+
+# -------------------------
+# Guardar cola
+# -------------------------
+
+def guardar_cola(request):
+    tickets = Ticket.objects.filter(estado="Abierto").order_by("fecha_creacion")
+    data = [
+        {
+            "cliente": ticket.cliente.nombre,
+            "titulo": ticket.titulo,
+            "descripcion": ticket.descripcion,
+            "prioridad": ticket.prioridad,
+            "estado": ticket.estado,
+            "fecha_creacion": ticket.fecha_creacion.isoformat(),
+        }
+        for ticket in tickets
+    ]
+    try:
+        with open("cola_tickets.json", "w") as f:
+            json.dump(data, f)
+        messages.success(request, "Cola de tickets guardada con éxito.")
+    except Exception as e:
+        messages.error(request, f"Error al guardar la cola de tickets: {e}")
+    return redirect("index")

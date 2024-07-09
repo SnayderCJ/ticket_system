@@ -54,5 +54,10 @@
   {% else %}
     <h2 class="text-center text-red-500 mt-8">No hay tickets en espera.</h2>
   {% endif %}
+
+  <button type="button" class="btn">
+    <a href="{% url 'guardar_cola' %}">Guardar Cola</a>
+  </button>
+
 </div>
 {% endblock %}

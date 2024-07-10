@@ -129,8 +129,10 @@ select.form-control {
 
 /* Estilos para el campo de búsqueda */
 input[type="text"] {
+    margin: 10px;
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 4px;
     margin-right: 10px;
 }
+

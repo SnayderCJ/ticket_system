@@ -16,20 +16,28 @@
     </ul>
   {% endif %}
 
-  <form method="get">
-    <label for="prioridad">Prioridad:</label>
-    <select name="prioridad" id="prioridad" class="form-control">
-        <option value="">Todas las prioridades</option>
-        {% for value, label in prioridades %}
-            <option value="{{ value }}" {% if value == prioridad %}selected{% endif %}>{{ label }}</option>
-        {% endfor %}
+  <form method="get" id="filtro-busqueda">
+    <label for="tipo_filtro">Filtrar por:</label>
+    <select name="tipo_filtro" id="tipo_filtro" class="form-control">
+        <option value="prioridad">Prioridad</option>
+        <option value="titulo">Título</option>
     </select>
-    <button type="submit" class="btn-form">Filtrar</button>
-</form>
 
-  <form method="get">
-      <input type="text" name="q" placeholder="Buscar por título...">
-      <button type="submit" class="btn-form">Buscar</button>
+    <div id="filtro-prioridad">
+        <label for="prioridad">Prioridad:</label>
+        <select name="prioridad" id="prioridad" class="form-control">
+            <option value="">Todas las prioridades</option>
+            {% for value, label in prioridades %}
+                <option value="{{ value }}" {% if value == prioridad %}selected{% endif %}>{{ label }}</option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <div id="filtro-titulo" style="display:none;">  {# Oculto por defecto #}
+        <input type="text" name="q" placeholder="Buscar por título...">
+    </div>
+
+    <button type="submit" class="btn-form">Filtrar/Buscar</button>
   </form>
 
   {% if tickets %}
@@ -69,4 +77,6 @@
     <h2>No hay tickets atendidos.</h2>
   {% endif %}
 </div>
+
+<script src="{% static 'js/filtro.js' %}"></script>
 {% endblock content %}

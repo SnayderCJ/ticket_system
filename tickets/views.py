@@ -61,8 +61,27 @@ def anadir_ticket(request):
 
 def tickets_en_espera(request):
     """Muestra la lista de tickets en espera (estado 'Abierto'), ordenados por fecha de creación."""
-    tickets = Ticket.objects.filter(estado="Abierto").order_by("fecha_creacion")
-    return render(request, "pages/clienteEnEspera.html", {"tickets": tickets})
+
+    queryset = Ticket.objects.filter(estado="Abierto").order_by("fecha_creacion")  # Ordenar por fecha de creación (ascendente)
+    filter_form = TicketFilter(request.GET, queryset=queryset)
+    tickets = filter_form.qs
+
+    search_query = request.GET.get('q')
+    if search_query:
+        tickets = tickets.filter(titulo__icontains=search_query)
+
+    # Convertir el QuerySet en una lista para poder usarla con la cola
+    tickets_list = list(tickets)
+
+    # Encolar los tickets (sin ordenar)
+    cola_tickets = Cola()
+    for ticket in tickets_list:
+        cola_tickets.encolar(ticket)
+
+    return render(request, "pages/clienteEnEspera.html", {
+        'tickets': cola_tickets,
+        'filter_form': filter_form,
+        'prioridades': Ticket.PRIORIDAD_CHOICES})
 
 
 def tickets_atendidos(request):

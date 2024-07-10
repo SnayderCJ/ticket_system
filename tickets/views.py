@@ -145,7 +145,7 @@ def agregar_cliente(request):
         if form.is_valid():
             form.save()
             messages.success(request, "Cliente añadido con éxito.")  
-            return redirect("agregar_cliente")
+            return redirect("anadir_ticket")
     else:
         form = ClienteForm()
     return render(request, "pages/agregarCliente.html", {"form": form})

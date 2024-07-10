@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+    <div class='hero'>
+        <h1 class='hero-content'>Detalles del Cliente</h1>
+    </div>
+
+    <div class="ticket-detalles">
+        <h2>{{ cliente.nombre }}</h2>
+        <p><strong>Email:</strong> {{ cliente.email }}</p>
+        <p><strong>Teléfono:</strong> {{ cliente.telefono }}</p>
+    </div>
+
+    {% if ticket %}
+        <div class="ticket-detalles">
+            <h2>Ticket {{ ticket.id_ticket }}</h2>
+            <p><strong>Título:</strong> {{ ticket.titulo }}</p>
+            <p><strong>Descripción:</strong> {{ ticket.descripcion }}</p>
+            <p><strong>Prioridad:</strong> {{ ticket.get_prioridad_display }}</p>
+            <p><strong>Estado:</strong> {{ ticket.get_estado_display }}</p>
+            <p><strong>Fecha de Creación:</strong> {{ ticket.fecha_creacion }}</p>
+        </div>
+    {% else %}
+        <p>No se ha seleccionado ningún ticket.</p>
+    {% endif %}
+
+    <a href="{% url 'index' %}" class="btn">Volver a la Lista</a>
+</div>
+{% endblock content %}

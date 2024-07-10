@@ -92,3 +92,17 @@
     justify-content: center;
     gap: 1rem;
 }   
+
+/* Detalles del Ticket */
+.ticket-detalles {
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+    margin-top: 20px; /* Espacio superior */
+}
+
+.ticket-detalles h2 {
+    color: var(--primary-color); 
+    border-bottom: 2px solid var(--primary-color); 
+    padding-bottom: 10px;  
+}

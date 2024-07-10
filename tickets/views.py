@@ -152,10 +152,15 @@ def agregar_cliente(request):
 
 
 def ver_cliente(request, cliente_id):
-    """Muestra los detalles de un cliente y sus tickets asociados."""
     cliente = get_object_or_404(Cliente, id=cliente_id)
-    tickets = cliente.tickets.all()
-    return render(request, "pages/verCliente.html", {"cliente": cliente, "tickets": tickets})
+    ticket_id = request.GET.get('ticket_id')  # Obtener el ID del ticket de la URL
+
+    if ticket_id:
+        ticket = get_object_or_404(Ticket, id_ticket=ticket_id, cliente=cliente)
+    else:
+        ticket = None  # Si no se proporciona un ticket_id, no mostrar ningún ticket
+
+    return render(request, "pages/verCliente.html", {"cliente": cliente, "ticket": ticket})
 
 
 # -------------------------
@@ -225,33 +230,6 @@ def buscar_ticket(request):
 
 
 # -------------------------
-# Funciones auxiliares (quicksort y busqueda_lineal)
-# -------------------------
-
-
-def quicksort(arr, key=lambda x: x):
-    """Implementación del algoritmo quicksort."""
-    if len(arr) < 2:
-        return arr
-    else:
-        pivote = arr[0]
-        menores = [i for i in arr[1:] if key(i) <= key(pivote)]
-        mayores = [i for i in arr[1:] if key(i) > key(pivote)]
-        return quicksort(menores, key) + [pivote] + quicksort(mayores, key)
-
-
-def busqueda_lineal(arr, query):
-    """Implementación de la búsqueda lineal."""
-    resultados = []
-    for elemento in arr:
-        if (
-            query.lower() in str(elemento).lower()
-        ):  # Búsqueda insensible a mayúsculas/minúsculas
-            resultados.append(elemento)
-    return resultados
-
-
-# -------------------------
 # Guardar cola
 # -------------------------
 
@@ -275,3 +253,4 @@ def guardar_cola(request):
     except Exception as e:
         messages.error(request, f"Error al guardar la cola de tickets: {e}")
     return redirect("index")
+

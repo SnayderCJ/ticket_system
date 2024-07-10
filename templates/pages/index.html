@@ -71,7 +71,7 @@
                         <td>{{ ticket.fecha_creacion }}</td>
                         <td>
                             <button class="btn">
-                                <a href="{% url 'atender_ticket' ticket.id_ticket %}">Ver Detalles</a>
+                                <a href="{% url 'ver_cliente' ticket.cliente.id %}?ticket_id={{ ticket.id_ticket }}">Ver Detalles</a>
                             </button>
                         </td>
                     </tr>

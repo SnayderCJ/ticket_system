@@ -16,16 +16,16 @@
     </ul>
   {% endif %}
 
-    <form method="get">
-      <label for="prioridad">Prioridad:</label>
-      <select name="prioridad" id="prioridad" class="form-control">
-          <option value="">Todas las prioridades</option>
-          {% for value, label in prioridades %}
-              <option value="{{ value }}" {% if value == prioridad %}selected{% endif %}>{{ label }}</option>
-          {% endfor %}
-      </select>
-      <button type="submit" class="btn-form">Filtrar</button>
-  </form>
+  <form method="get">
+    <label for="prioridad">Prioridad:</label>
+    <select name="prioridad" id="prioridad" class="form-control">
+        <option value="">Todas las prioridades</option>
+        {% for value, label in prioridades %}
+            <option value="{{ value }}" {% if value == prioridad %}selected{% endif %}>{{ label }}</option>
+        {% endfor %}
+    </select>
+    <button type="submit" class="btn-form">Filtrar</button>
+</form>
 
   <form method="get">
       <input type="text" name="q" placeholder="Buscar por título...">

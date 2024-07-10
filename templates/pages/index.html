@@ -32,6 +32,7 @@
         </select>
         <button type="submit" class="btn-form">Filtrar</button>
     </form>
+
     
     <form method="get">
         <input type="text" name="q" placeholder="Buscar por título...">
@@ -57,18 +58,14 @@
                         <td>{{ ticket.id_ticket }}</td>
                         <td>{{ ticket.titulo }}</td>
                         <td>{{ ticket.cliente }}</td>
-                        <td>{{ ticket.get_prioridad_display }}</td>  {# Mostrar el valor legible #}
-                        <td>{{ ticket.get_estado_display }}</td>    {# Mostrar el valor legible #}
+                        <td>{{ ticket.get_prioridad_display }}</td>
+                        <td>{{ ticket.get_estado_display }}</td>
                         <td>{{ ticket.fecha_creacion }}</td>
                         <td>
                             <button class="btn">
                                 <a href="{% url 'atender_ticket' ticket.id_ticket %}">Ver Detalles</a>
                             </button>
                         </td>
-                    </tr>
-                {% empty %}
-                    <tr>
-                        <td colspan="7">No hay tickets disponibles.</td>
                     </tr>
                 {% endfor %}
             </tbody>

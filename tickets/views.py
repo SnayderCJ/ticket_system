@@ -5,7 +5,10 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from .models import Ticket, Cliente
 from .forms import TicketForm, ClienteForm, TicketUpdateForm, TicketFilter
+from .cola import quicksort, busqueda_binaria, Cola,render_to_pdf
+from .cola import Nodo, Cola, quicksort, busqueda_binaria
 
+cola_tickets = Cola()
 
 # -------------------------
 # Vistas para la página de inicio
@@ -19,22 +22,26 @@ def home(request):
 # Vistas para gestión de tickets
 # -------------------------
 def index(request):
-    queryset = Ticket.objects.all().order_by("-prioridad")
-    prioridad = request.GET.get('prioridad')
-
-    if prioridad:
-        queryset = queryset.filter(prioridad=prioridad)
-
-    filter_form = TicketFilter(request.GET)  # Pasa request.GET al formulario
+    queryset = Ticket.objects.all().order_by("fecha_creacion")  # Ordenar por fecha de creación (ascendente)
+    filter_form = TicketFilter(request.GET, queryset=queryset)
+    tickets = filter_form.qs  
 
     search_query = request.GET.get('q')
     if search_query:
-        queryset = queryset.filter(titulo__icontains=search_query)
+        tickets = tickets.filter(titulo__icontains=search_query)
+
+    # Convertir el QuerySet en una lista para poder usarla con la cola
+    tickets_list = list(tickets)
+
+    # Encolar los tickets (sin ordenar)
+    cola_tickets = Cola()
+    for ticket in tickets_list:
+        cola_tickets.encolar(ticket)
 
     return render(request, 'pages/index.html', {
-        'tickets': queryset,
+        'tickets': cola_tickets,
         'filter_form': filter_form,
-        'prioridades': Ticket.PRIORIDAD_CHOICES  # Pasa las opciones de prioridad
+        'prioridades': Ticket.PRIORIDAD_CHOICES
     })
 
 def anadir_ticket(request):
@@ -59,22 +66,26 @@ def tickets_en_espera(request):
 
 
 def tickets_atendidos(request):
-    queryset = Ticket.objects.all().order_by("-prioridad")
-    prioridad = request.GET.get('prioridad')
-
-    if prioridad:
-        queryset = queryset.filter(prioridad=prioridad)
-
-    filter_form = TicketFilter(request.GET)  # Pasa request.GET al formulario
+    queryset = Ticket.objects.filter(estado="Cerrado").order_by("fecha_creacion")  # Ordenar por fecha de creación (ascendente)
+    filter_form = TicketFilter(request.GET, queryset=queryset)
+    tickets = filter_form.qs
 
     search_query = request.GET.get('q')
     if search_query:
-        queryset = queryset.filter(titulo__icontains=search_query)
+        tickets = tickets.filter(titulo__icontains=search_query)
+
+    # Convertir el QuerySet en una lista para poder usarla con la cola
+    tickets_list = list(tickets)
+
+    # Encolar los tickets (sin ordenar)
+    cola_tickets = Cola()
+    for ticket in tickets_list:
+        cola_tickets.encolar(ticket)
 
     return render(request, 'pages/clienteAtendidos.html', {
-        'tickets': queryset,
+        'tickets': cola_tickets,
         'filter_form': filter_form,
-        'prioridades': Ticket.PRIORIDAD_CHOICES  # Pasa las opciones de prioridad
+        'prioridades': Ticket.PRIORIDAD_CHOICES
     })
 
 

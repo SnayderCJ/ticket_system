@@ -73,6 +73,10 @@
       {% endfor %}
     </tbody>
   </table>
+
+  <button type="button" class="btn">
+    <a href="{% url 'tickets_atendidos' %}?pdf=1">Generar PDF</a>
+</button>
   {% else %}
     <h2>No hay tickets atendidos.</h2>
   {% endif %}

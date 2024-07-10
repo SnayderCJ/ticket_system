@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tickets Atendidos</title>
+    <style>
+        /* Estilos CSS para el PDF */
+        body { font-family: sans-serif; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { border: 1px solid #ddd; padding: 8px; }
+        th { background-color: #f2f2f2; }
+    </style>
+</head>
+<body>
+    <h1>Tickets Atendidos</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID Ticket</th>
+                <th>Cliente</th>
+                <th>Título</th>
+                <th>Descripción</th>
+                <th>Prioridad</th>
+                <th>Fecha de Creación</th>
+                <th>Estado</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for ticket in tickets %}
+                <tr>
+                    <td>{{ ticket.id_ticket }}</td>
+                    <td>{{ ticket.cliente.nombre }}</td>
+                    <td>{{ ticket.titulo }}</td>
+                    <td>{{ ticket.descripcion }}</td>
+                    <td>{{ ticket.get_prioridad_display }}</td>
+                    <td>{{ ticket.fecha_creacion }}</td>
+                    <td>{{ ticket.get_estado_display }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

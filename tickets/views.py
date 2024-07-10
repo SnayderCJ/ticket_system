@@ -85,7 +85,7 @@ def tickets_en_espera(request):
 
 
 def tickets_atendidos(request):
-    queryset = Ticket.objects.filter(estado="Cerrado").order_by("fecha_creacion")  # Ordenar por fecha de creación (ascendente)
+    queryset = Ticket.objects.filter(estado="Cerrado").order_by("fecha_creacion")  # FIFO
     filter_form = TicketFilter(request.GET, queryset=queryset)
     tickets = filter_form.qs
 
@@ -101,12 +101,16 @@ def tickets_atendidos(request):
     for ticket in tickets_list:
         cola_tickets.encolar(ticket)
 
+    if request.GET.get('pdf'):  # Verificar si se solicita un PDF
+        # Pasar la cola de tickets al contexto
+        context = {'tickets': cola_tickets}
+        return render_to_pdf('pages/pdf_tickets_atendidos.html', context)
+
     return render(request, 'pages/clienteAtendidos.html', {
         'tickets': cola_tickets,
         'filter_form': filter_form,
         'prioridades': Ticket.PRIORIDAD_CHOICES
     })
-
 
 def atender_ticket(request, ticket_id):
     """Permite ver y actualizar el estado de un ticket."""

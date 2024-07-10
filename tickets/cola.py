@@ -47,7 +47,7 @@ class Cola:
             yield actual.data
             actual = actual.next
 
-    def __len__(self):
+    def __len__(self):  
         # Obtener la longitud de la cola
         actual = self.frente
         contador = 0

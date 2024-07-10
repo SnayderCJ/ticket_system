@@ -47,14 +47,6 @@ class Cola:
             yield actual.data
             actual = actual.next
 
-    def __len__(self):  
-        # Obtener la longitud de la cola
-        actual = self.frente
-        contador = 0
-        while actual:
-            contador += 1
-            actual = actual.next
-        return contador
 
 def quicksort(arr, key=lambda x: x, reverse=False):
     if len(arr) < 2:

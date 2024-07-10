@@ -120,7 +120,7 @@ USE_TZ = True
 STATIC_URL = "static/images/"
 
 STATICFILES_DIRS = [
-    BASE_DIR / "static",  # Agrega esta línea
+    BASE_DIR / "static", 
 ]
 
 # Default primary key field type

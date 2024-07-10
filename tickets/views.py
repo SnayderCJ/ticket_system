@@ -53,7 +53,7 @@ def anadir_ticket(request):
             ticket.usuario_asignado = request.user
             ticket.save()
             messages.success(request, "Ticket añadido con éxito.")
-            return redirect("index")
+            return redirect("tickets_en_espera")
     else:
         form = TicketForm()
     return render(request, "pages/anadirTickets.html", {"form": form})
@@ -113,16 +113,23 @@ def tickets_atendidos(request):
     })
 
 def atender_ticket(request, ticket_id):
-    """Permite ver y actualizar el estado de un ticket."""
     ticket = get_object_or_404(Ticket, id_ticket=ticket_id)
+
     if request.method == "POST":
         form = TicketUpdateForm(request.POST, instance=ticket)
         if form.is_valid():
-            form.save()
-            messages.success(request, "Ticket atendido y cerrado con éxito.")
-            return redirect("index")
+            ticket = form.save()  # Guarda el ticket para obtener el estado actualizado
+
+            if ticket.estado == Ticket.ESTADO_ABIERTO:  # Si el estado es Abierto
+                messages.success(request, "Ticket atendido y abierto con éxito.")
+                return redirect("tickets_en_espera")  # Redirige a tickets en espera
+            elif ticket.estado == Ticket.ESTADO_CERRADO:  # Si el estado es Cerrado
+                messages.success(request, "Ticket atendido y cerrado con éxito.")
+                return redirect("tickets_atendidos")   # Redirige a tickets atendidos
+
     else:
         form = TicketUpdateForm(instance=ticket)
+
     return render(request, "pages/atenderTicket.html", {"ticket": ticket, "form": form})
 
 
@@ -137,7 +144,7 @@ def agregar_cliente(request):
         form = ClienteForm(request.POST)
         if form.is_valid():
             form.save()
-            messages.success(request, "Cliente añadido con éxito.")
+            messages.success(request, "Cliente añadido con éxito.")  
             return redirect("agregar_cliente")
     else:
         form = ClienteForm()
